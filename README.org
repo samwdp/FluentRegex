@@ -1,0 +1,18 @@
+#+TITLE: Readme
+* Fluent Regex
+Ever thought that regex is a bit crap to write. Now it isnt with Fluent Regex.
+Create regex search queries quickly and easily.
+
+** Usage
+#+begin_src csharp
+var result = FluentRegex.Start().MatchFromBeginningOfInput(a =>
+{
+    return a.AddSubexpression(b =>
+        {
+            return b.MatchTab()
+                .AddSubexpression(c => c.MatchCharacterSet("A-Za-z")).EndSubexpression();
+        }).EndSubexpression();
+}).AsString();
+#+end_src
+#+RESULT:
+/^(\t([A-Za-z]))

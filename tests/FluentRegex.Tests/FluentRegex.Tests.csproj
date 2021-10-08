@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\FluentRegex\FluentRegex.csproj" />
+    <ProjectReference Include="..\..\src\FluentRegex\Fluent.Regex.csproj" />
   </ItemGroup>
 
 </Project>
