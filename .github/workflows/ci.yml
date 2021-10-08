@@ -20,8 +20,10 @@ jobs:
         run: dotnet build src/FluentRegex
       - name: Test
         run: dotnet test tests/FluentRegex.Tests
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0.9.7
       - name: Determine Version
-        uses: GitTools/actions@v0.9.10
+        uses: gittools/actions/gitversion/execute@v0.9.7
       - name: Pack
         run: dotnet pack --configuration Release -p:PackageVersion=$SEMVER src/FluentRegex
       - name: Publish the package to nuget.org
