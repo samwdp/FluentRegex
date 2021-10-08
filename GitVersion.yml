@@ -15,7 +15,7 @@ branches:
     tag: beta
     is-release-branch: true
     increment: patch
-    source-brances: ["dev"]
+    source-branches: ["dev"]
 ignore:
   sha: []
 merge-message-formats: {}
