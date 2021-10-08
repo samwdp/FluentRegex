@@ -33,6 +33,6 @@ jobs:
       - name: Pack
         run: dotnet pack --configuration Release -p:PackageVersion=$GITVERSION_SEMVER src/FluentRegex
       - name: Publish the package to nuget.org
-        run: dotnet nuget push */bin/Release/*.nupkg -k $NUGET_AUTH_TOKEN -s https://api.nuget.org/v3/index.json
+        run: dotnet nuget push src/FluentRegex/bin/Release/*.nupkg -k $NUGET_AUTH_TOKEN -s https://api.nuget.org/v3/index.json
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.NUGET_TOKEN }}
