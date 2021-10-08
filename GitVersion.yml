@@ -9,13 +9,15 @@ branches:
     tag: ""
     is-release-branch: true
     source-branches: ["main"]
-  dev:
+  feature:
+    regex: ^feature?[/-]
     mode: ContinuousDelivery
-    regex: ^dev$
-    tag: beta
-    is-release-branch: true
+    tag: useBranchName
     increment: Patch
-    source-branches: ["dev"]
+    prevent-increment-of-merged-branch-version: false
+    track-merge-target: false
+    tracks-release-branches: false
+    is-release-branch: false
 ignore:
   sha: []
 merge-message-formats: {}
