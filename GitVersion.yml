@@ -5,9 +5,11 @@ branches:
     mode: ContinuousDeployment
     tag: beta
     increment: Patch
+    regex: ^feature?[/-]
   main:
     mode: ContinuousDeployment
     increment: Minor
+    regex: ^main$
 ignore:
   sha: []
 merge-message-formats: {}
