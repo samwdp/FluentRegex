@@ -6,10 +6,12 @@ branches:
     tag: beta
     increment: Patch
     regex: ^feature?[/-]
+    source-branches: ["main"]
   main:
     mode: ContinuousDeployment
     increment: Minor
     regex: ^main$
+    source-branches: ["main"]
 ignore:
   sha: []
 merge-message-formats: {}
