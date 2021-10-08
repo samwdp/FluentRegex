@@ -1,0 +1,30 @@
+name: CI
+on:
+  push:
+    branches:
+      - "main"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      semVer: ${{ steps.gitversion.outputs.semVer }}
+    name: Build Dotnet
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "6.0"
+          include-prerelease: true
+      - name: Build
+        run: dotnet build src/FluentRegex
+      - name: Test
+        run: dotnet test tests/FluentRegex.Tests
+      - name: Determine Version
+        uses: gittools/actions/gitversion/execute@v0.9.7
+      - name: Pack
+        run: dotnet pack --configuration Release -p:PackageVersion=$SEMVER src/FluentRegex
+      - name: Publish the package to nuget.org
+        run: dotnet nuget push */bin/Release/*.nupkg -k $NUGET_AUTH_TOKEN -s https://api.nuget.org/v3/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.NUGET_TOKEN }}
