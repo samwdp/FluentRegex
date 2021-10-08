@@ -14,20 +14,20 @@ jobs:
       - name: Setup Dotnet 3
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '3.1.x'
+          dotnet-version: "3.1.x"
       - name: Setup Dotnet 6
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '6.0.x'
+          dotnet-version: "6.0.x"
           include-prerelease: true
-      - name: Build
-        run: dotnet build src/FluentRegex
-      - name: Test
-        run: dotnet test tests/FluentRegex.Tests
       - name: Install GitVersion
         uses: gittools/actions/gitversion/setup@v0.9.7
         with:
           versionSpec: "5.5.x"
+      - name: Build
+        run: dotnet build src/FluentRegex
+      - name: Test
+        run: dotnet test tests/FluentRegex.Tests
       - name: Determine Version
         uses: gittools/actions/gitversion/execute@v0.9.7
       - name: Pack
