@@ -4,7 +4,16 @@ next-version: 1.0.0
 branches:
   main:
     mode: ContinuousDelivery
-    tag: ''
+    regex: ^main$
+    increment: patch
+    tag: ""
+    isReleaseBranch: true
+  dev:
+    mode: ContinuousDelivery
+    regex: ^dev$
+    tag: beta
+    isReleaseBranch: true
+    increment: patch
 ignore:
   sha: []
 merge-message-formats: {}
