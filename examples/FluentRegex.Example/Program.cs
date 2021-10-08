@@ -13,10 +13,10 @@ string a = FluentRegex.FluentRegex.Start()
 
 var result = FluentRegex.FluentRegex.Start().MatchFromBeginningOfInput(a =>
 {
-    return a.MatchTab()
-        .AddSubexpression(b =>
+    return a.AddSubexpression(b =>
         {
-            return b.AddSubexpression(c => c.MatchCharacterSet("A-Za-z").MatchWord("basic")).EndSubexpression();
+            return b.MatchTab()
+                .AddSubexpression(c => c.MatchCharacterSet("A-Za-z").MatchWord("basic")).EndSubexpression();
         }).EndSubexpression();
 }).AsString();
 
