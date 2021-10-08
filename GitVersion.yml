@@ -8,12 +8,14 @@ branches:
     increment: patch
     tag: ""
     is-release-branch: true
+    source-branches: ["main"]
   dev:
     mode: ContinuousDelivery
     regex: ^dev$
     tag: beta
     is-release-branch: true
     increment: patch
+    source-brances: ["dev"]
 ignore:
   sha: []
 merge-message-formats: {}
