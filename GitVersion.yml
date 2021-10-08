@@ -7,12 +7,12 @@ branches:
     regex: ^main$
     increment: patch
     tag: ""
-    isReleaseBranch: true
+    is-release-branch: true
   dev:
     mode: ContinuousDelivery
     regex: ^dev$
     tag: beta
-    isReleaseBranch: true
+    is-release-branch: true
     increment: patch
 ignore:
   sha: []
