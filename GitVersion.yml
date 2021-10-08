@@ -5,7 +5,7 @@ branches:
   main:
     mode: ContinuousDelivery
     regex: ^main$
-    increment: patch
+    increment: Minor
     tag: ""
     is-release-branch: true
     source-branches: ["main"]
@@ -14,7 +14,7 @@ branches:
     regex: ^dev$
     tag: beta
     is-release-branch: true
-    increment: patch
+    increment: Patch
     source-branches: ["dev"]
 ignore:
   sha: []
