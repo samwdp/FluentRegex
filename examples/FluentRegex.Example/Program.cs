@@ -1,5 +1,7 @@
 ﻿// outputs /((([abc])))
-string a = FluentRegex.FluentRegex.Start()
+using Fluent.Regex.Core;
+
+string a = Regex.Start()
     .AddSubexpression(s =>
     {
         return s.AddSubexpression(b =>
@@ -11,7 +13,7 @@ string a = FluentRegex.FluentRegex.Start()
     .EndSubexpression()
     .AsString();
 
-var result = FluentRegex.FluentRegex.Start().MatchFromBeginningOfInput(a =>
+var result = Regex.Start().MatchFromBeginningOfInput(a =>
 {
     return a.AddSubexpression(b =>
         {

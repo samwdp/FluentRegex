@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <Nullable>enable</Nullable>
 
     <IsPackable>false</IsPackable>
@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\FluentRegex\Fluent.Regex.csproj" />
+    <ProjectReference Include="..\..\src\Fluent.Regex.Core\Fluent.Regex.Core.csproj" />
   </ItemGroup>
 
 </Project>

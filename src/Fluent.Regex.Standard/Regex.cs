@@ -1,69 +1,72 @@
-﻿using System.Text;
-using System.Text.RegularExpressions;
+using System;
+using System.Text;
 
-namespace FluentRegex;
-    public class FluentRegex : IFluentRegex, ISubExpression
+namespace Fluent.Regex.Standard
+{
+    public class Regex : IRegex, ISubExpression
     {
-        public StringBuilder sb = new StringBuilder();
-        private FluentRegex(bool clean = false)
+        private StringBuilder sb = new StringBuilder();
+        private Regex(bool clean = false)
         {
             if (!clean)
             {
                 sb.Append("/");
             }
         }
-        public static FluentRegex Start() => new FluentRegex();
-        private static FluentRegex Clean() => new FluentRegex(true);
-        public FluentRegex MatchSingleCharacter(char character)
+
+        public static Regex Start() => new Regex();
+        public static Regex Clean() => new Regex(true);
+
+        public Regex MatchSingleCharacter(char character)
         {
             sb.Append($".{character}");
             return this;
         }
 
-        public FluentRegex MatchDigit()
+        public Regex MatchDigit()
         {
             sb.Append(@"\d");
             return this;
         }
 
-        public FluentRegex EndSubexpression()
+        public Regex EndSubexpression()
         {
             return this;
         }
 
-        public FluentRegex MatchNoneDigit()
+        public Regex MatchNoneDigit()
         {
             sb.Append(@"\D");
             return this;
         }
 
-        public FluentRegex MatchCharacter()
+        public Regex MatchCharacter()
         {
             sb.Append(@"\w");
             return this;
         }
 
-        public FluentRegex MatchNoneCharacter()
+        public Regex MatchNoneCharacter()
         {
             sb.Append(@"\W");
             return this;
         }
 
-        public FluentRegex MatchCharacterSet(string sequence)
+        public Regex MatchCharacterSet(string sequence)
         {
             sb.Append($"[{sequence}]");
             return this;
         }
 
-        public FluentRegex MatchWord(string word)
+        public Regex MatchWord(string word)
         {
             sb.Append(word);
             return this;
         }
 
-        public ISubExpression AddSubexpression(Func<FluentRegex, FluentRegex> pattern)
+        public ISubExpression AddSubexpression(Func<Regex, Regex> pattern)
         {
-            sb.Append($"({pattern.Invoke(FluentRegex.Clean()).AsString()})");
+            sb.Append($"({pattern.Invoke(Regex.Clean()).AsString()})");
             return this;
         }
 
@@ -77,164 +80,166 @@ namespace FluentRegex;
             return sb.ToString();
         }
 
-        public Regex AsRegex()
+        public System.Text.RegularExpressions.Regex AsRegex()
         {
-            return new Regex(sb.ToString());
+            return new System.Text.RegularExpressions.Regex(sb.ToString());
         }
 
-        public FluentRegex EscapeChar(char character)
+        public Regex EscapeChar(char character)
         {
             sb.Append($@"\{character}");
             return this;
         }
 
-        public FluentRegex MatchNegativeCharacterSet(string sequence)
+        public Regex MatchNegativeCharacterSet(string sequence)
         {
             sb.Append($"[^{sequence}]");
             return this;
         }
 
-        public FluentRegex MatchExactNCharInstance(string sequence, uint instance)
+        public Regex MatchExactNCharInstance(string sequence, uint instance)
         {
             sb.Append(sequence + "{" + instance + "}");
             return this;
         }
 
-        public FluentRegex MatchAtLeastNCharInstance(string sequence, uint instance)
+        public Regex MatchAtLeastNCharInstance(string sequence, uint instance)
         {
             sb.Append(sequence + "{" + instance + ",}");
             return this;
         }
 
-        public FluentRegex MatchInRangeCharInstanc(string sequence, uint start, uint max)
+        public Regex MatchInRangeCharInstanc(string sequence, uint start, uint max)
         {
             sb.Append(sequence + "{" + $"{start},{max}" + "}");
             return this;
         }
 
-        public FluentRegex MatchSingleWhitespace()
+        public Regex MatchSingleWhitespace()
         {
             sb.Append(@"\s");
             return this;
         }
 
-        public FluentRegex MatchNoneWhitespace()
+        public Regex MatchNoneWhitespace()
         {
             sb.Append(@"\S");
             return this;
         }
 
-        public FluentRegex MatchTab()
+        public Regex MatchTab()
         {
             sb.Append(@"\t");
             return this;
         }
 
-        public FluentRegex MatchCarriageReturn()
+        public Regex MatchCarriageReturn()
         {
             sb.Append(@"\r");
             return this;
         }
 
-        public FluentRegex MatchLineFeed()
+        public Regex MatchLineFeed()
         {
             sb.Append(@"\n");
             return this;
         }
 
-        public FluentRegex MatchVerticalTab()
+        public Regex MatchVerticalTab()
         {
             sb.Append(@"\v");
             return this;
         }
 
-        public FluentRegex MatchFormFeed()
+        public Regex MatchFormFeed()
         {
             sb.Append(@"\f");
             return this;
         }
 
-        public FluentRegex MatchBackspace()
+        public Regex MatchBackspace()
         {
             sb.Append(@"[\b]");
             return this;
         }
 
-        public FluentRegex MatchNullCharacter()
+        public Regex MatchNullCharacter()
         {
             sb.Append(@"\0");
             return this;
         }
 
-        public FluentRegex MatchControlCharacter(char character)
+        public Regex MatchControlCharacter(char character)
         {
             sb.Append($@"\c{character}");
             return this;
         }
 
-        public FluentRegex MatchHexidecimalCharacter(string hexcode)
+        public Regex MatchHexidecimalCharacter(string hexcode)
         {
             sb.Append($@"\x{hexcode}");
             return this;
         }
 
-        public FluentRegex MatchUTF16Character(string hexcode)
+        public Regex MatchUTF16Character(string hexcode)
         {
             sb.Append($@"\u{hexcode}");
             return this;
         }
 
-        public FluentRegex MatchLookAheadAssertion(string x, string y)
+        public Regex MatchLookAheadAssertion(string x, string y)
         {
             sb.Append($"{x}(?={y})");
             return this;
         }
 
-        public FluentRegex MatchNagativeLookAheadAssertion(string x, string y)
+        public Regex MatchNagativeLookAheadAssertion(string x, string y)
         {
             sb.Append($"{x}(?!{y})");
             return this;
         }
 
-        public FluentRegex MatchLookBehindAssertion(string x, string y)
+        public Regex MatchLookBehindAssertion(string x, string y)
         {
             sb.Append($"(?<={y}){x}");
             return this;
         }
 
-        public FluentRegex MatchNegativeLookBehindAssertion(string x, string y)
+        public Regex MatchNegativeLookBehindAssertion(string x, string y)
         {
             sb.Append($"(?<!{y}){x}");
             return this;
         }
 
-        public FluentRegex MatchWithOr(string x, string y)
+        public Regex MatchWithOr(string x, string y)
         {
             sb.Append($"{x}|{y}");
             return this;
         }
 
-        public FluentRegex MatchFromEndOfInput(string match)
+        public Regex MatchFromEndOfInput(string match)
         {
             sb.Append($"{match}$");
             return this;
         }
 
-        public FluentRegex MatchFromBeginningOfInput(string match)
+        public Regex MatchFromBeginningOfInput(string match)
         {
             sb.Append($"^{match}");
             return this;
         }
 
-        public FluentRegex MatchFromBeginningOfInput(Func<FluentRegex, FluentRegex> func)
+        public Regex MatchFromBeginningOfInput(Func<Regex, Regex> func)
         {
-            sb.Append($"^{func.Invoke(FluentRegex.Clean()).AsString()}");
+            sb.Append($"^{func.Invoke(Regex.Clean()).AsString()}");
             return this;
         }
 
-        public FluentRegex MatchFromEndOfInput(Func<FluentRegex, FluentRegex> func)
+        public Regex MatchFromEndOfInput(Func<Regex, Regex> func)
         {
-            sb.Append($"{func.Invoke(FluentRegex.Clean()).AsString()}$");
+            sb.Append($"{func.Invoke(Regex.Clean()).AsString()}$");
             return this;
         }
+
     }
+}
