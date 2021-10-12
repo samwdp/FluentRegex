@@ -1,19 +1,18 @@
 assembly-versioning-scheme: MajorMinorPatch
-mode: ContinuousDeployment
+mode: Mainline
+next-version: 1.0.0
 branches:
   feature:
-    mode: ContinuousDeployment
     tag: beta
     increment: Patch
     regex: ^feature?[/-]
     source-branches:
-    - main
+      - main
   main:
-    mode: ContinuousDeployment
     increment: Minor
     regex: ^main$
     source-branches:
-    - main
+      - main
   develop: {}
 ignore:
   sha: []
