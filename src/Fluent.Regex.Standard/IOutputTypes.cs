@@ -17,6 +17,6 @@ namespace Fluent.Regex.Standard
         /// <summary>
         /// Returns the generated regular expression as a Regex class
         /// </summary>
-        Regex AsRegex();
+        System.Text.RegularExpressions.Regex AsRegex();
     }
 }

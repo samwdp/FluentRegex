@@ -80,9 +80,9 @@ namespace Fluent.Regex.Standard
             return sb.ToString();
         }
 
-        public Regex AsRegex()
+        public System.Text.RegularExpressions.Regex AsRegex()
         {
-            return new Regex(sb.ToString());
+            return new System.Text.RegularExpressions.Regex(sb.ToString());
         }
 
         public Regex EscapeChar(char character)
