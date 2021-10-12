@@ -2,7 +2,6 @@ assembly-versioning-scheme: MajorMinorPatch
 mode: Mainline
 next-version: 1.0
 increment: Inherit
-update-build-number: true
 branches:
   feature:
     tag: beta
