@@ -14,10 +14,6 @@ namespace Fluent.Regex.Core
             }
         }
 
-        public Regex()
-        {
-        }
-
         public static Regex Start() => new Regex();
         private static Regex Clean() => new Regex(true);
         public Regex MatchSingleCharacter(char character)
