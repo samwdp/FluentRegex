@@ -5,7 +5,7 @@ Create regex search queries quickly and easily.
 
 ** Usage
 #+begin_src csharp
-var result = FluentRegex.Start().MatchFromBeginningOfInput(a =>
+var result = Regex.Start().MatchFromBeginningOfInput(a =>
 {
     return a.AddSubexpression(b =>
         {
@@ -16,3 +16,11 @@ var result = FluentRegex.Start().MatchFromBeginningOfInput(a =>
 #+end_src
 #+RESULT:
 /^(\t([A-Za-z]))
+
+** What is the difference
+- Fluent.Regex.Standard
+  This is a netstandard 2.1 library. Use this for legacy applications
+- Fluent.Regex.Core
+  This is a net5.0 library. Use this for new applications.
+
+Both are functionally identical

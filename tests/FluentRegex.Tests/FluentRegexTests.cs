@@ -1,54 +1,55 @@
 using Xunit;
 using FluentAssertions;
-namespace FluentRegex.Tests;
+using Fluent.Regex.Core;
+namespace Fluent.Regex.Tests;
 
 public class FluentRegexTests
 {
     [Fact]
-    public void FluentRegex_Digit_Match_Output()
+    public void Regex_Digit_Match_Output()
     {
-        var a = FluentRegex.Start().MatchCharacter().AsString();
+        var a = Regex.Start().MatchCharacter().AsString();
 
         a.Should().NotBeNull();
         a.Should().Be(@"/\w");
     }
 
     [Fact]
-    public void FluentRegex_NoneDigit_Match_Output()
+    public void Regex_NoneDigit_Match_Output()
     {
-        var a = FluentRegex.Start().MatchNoneCharacter().AsString();
+        var a = Regex.Start().MatchNoneCharacter().AsString();
 
         a.Should().NotBeNull();
         a.Should().Be(@"/\W");
     }
 
     [Fact]
-    public void FluentRegex_MatchWord()
+    public void Regex_MatchWord()
     {
-        var a = FluentRegex.Start().MatchCharacterSet("test").AsString();
+        var a = Regex.Start().MatchCharacterSet("test").AsString();
         a.Should().NotBeNull();
         a.Should().Be(@"/[test]");
     }
 
     [Fact]
-    public void FluentRegex_AddSubsequence()
+    public void Regex_AddSubsequence()
     {
-        var a = FluentRegex.Start().AddSubexpression(e => e.MatchCharacterSet("test")).EndSubexpression().AsString();
+        var a = Regex.Start().AddSubexpression(e => e.MatchCharacterSet("test")).EndSubexpression().AsString();
         a.Should().NotBeNull();
         a.Should().Be(@"/([test])");
     }
 
     [Fact]
-    public void FluentRegex_MatchFromBeginning_Basic()
+    public void Regex_MatchFromBeginning_Basic()
     {
-        var result = FluentRegex.Start().MatchFromBeginningOfInput("basic").AsString();
+        var result = Regex.Start().MatchFromBeginningOfInput("basic").AsString();
         result.Should().Be(@"/^basic");
     }
 
     [Fact]
-    public void FluentRegex_MatchFromBeginning_Advanced()
+    public void Regex_MatchFromBeginning_Advanced()
     {
-        var result = FluentRegex.Start().MatchFromBeginningOfInput(a =>
+        var result = Regex.Start().MatchFromBeginningOfInput(a =>
         {
             return a.AddSubexpression(b =>
                 {
